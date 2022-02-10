@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel target="1.8">
+      <module name="Sample_Clean.app" target="11" />
+      <module name="Sample_Clean.buildSrc" target="11" />
+      <module name="Sample_Clean.data" target="11" />
+      <module name="Sample_Clean.presentation" target="11" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
