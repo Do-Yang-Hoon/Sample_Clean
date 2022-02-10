@@ -5,9 +5,6 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val AppModule = module {
-
-
-
     single { createGetPostsUseCase(get()) }
 
     single { createPostRepository(get()) }

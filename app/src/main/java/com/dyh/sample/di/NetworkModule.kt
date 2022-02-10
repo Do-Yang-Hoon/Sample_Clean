@@ -9,15 +9,16 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.dsl.module
 import retrofit2.Retrofit
-import retrofit2.converter.moshi.MoshiConverterFactory
+import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 private const val TIME_OUT = 30L
 
 val NetworkModule = module {
 
-    single { createService(get()) }
-
+    single {
+        createService(get())
+    }
     single {
         val httpLoggingInterceptor = HttpLoggingInterceptor()
         httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BASIC
@@ -30,14 +31,11 @@ val NetworkModule = module {
 
         Retrofit.Builder()
             .baseUrl(BuildConfig.BASE_URL)
-            .addConverterFactory(MoshiConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create())
             .client(networkClient)
             .build()
     }
-
-
 }
-
 
 fun createService(retrofit: Retrofit): ApiService {
     return retrofit.create(ApiService::class.java)

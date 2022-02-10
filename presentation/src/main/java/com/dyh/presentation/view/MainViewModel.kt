@@ -18,6 +18,7 @@ class MainViewModel constructor(private val getPostsUseCase: GetPostsUseCase) : 
 
     fun getPosts() {
         setLoading(true)
+        Log.e("dyh","$getPostsUseCase")
         getPostsUseCase.invoke(viewModelScope, null, object : UseCaseResponse<List<Post>> {
                 override fun onSuccess(result: List<Post>) {
                     Log.i(TAG, "result: $result")
@@ -26,6 +27,7 @@ class MainViewModel constructor(private val getPostsUseCase: GetPostsUseCase) : 
                 }
 
                 override fun onError(apiError: ApiError?) {
+                    Log.e("dyh","$apiError")
                     messageData.value = apiError?.getErrorMessage()
                     setLoading(false)
                 }
