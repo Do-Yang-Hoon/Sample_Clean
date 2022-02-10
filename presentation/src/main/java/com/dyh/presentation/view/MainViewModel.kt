@@ -1,6 +1,5 @@
 package com.dyh.presentation.view
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.dyh.domain.entity.ApiError
@@ -18,16 +17,13 @@ class MainViewModel constructor(private val getPostsUseCase: GetPostsUseCase) : 
 
     fun getPosts() {
         setLoading(true)
-        Log.e("dyh","$getPostsUseCase")
         getPostsUseCase.invoke(viewModelScope, null, object : UseCaseResponse<List<Post>> {
                 override fun onSuccess(result: List<Post>) {
-                    Log.i(TAG, "result: $result")
                     postsData.value = result
                     setLoading(false)
                 }
 
                 override fun onError(apiError: ApiError?) {
-                    Log.e("dyh","$apiError")
                     messageData.value = apiError?.getErrorMessage()
                     setLoading(false)
                 }
@@ -39,9 +35,4 @@ class MainViewModel constructor(private val getPostsUseCase: GetPostsUseCase) : 
         viewModelScope.cancel()
         super.onCleared()
     }
-
-    companion object {
-        private val TAG = MainViewModel::class.java.name
-    }
-
 }
