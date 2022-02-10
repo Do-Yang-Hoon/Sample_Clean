@@ -5,14 +5,10 @@ import com.dyh.data.PostsRepositoryImp
 import com.dyh.domain.repository.PostsRepository
 import com.dyh.domain.usecase.GetPostsUseCase
 import com.dyh.sample.BuildConfig
-import com.squareup.moshi.Moshi
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.converter.scalars.ScalarsConverterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.concurrent.TimeUnit
 
