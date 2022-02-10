@@ -22,15 +22,6 @@ val NetworkModule = module {
 
     single { createService(get()) }
 
-//    single { createRetrofit(get(), BuildConfig.BASE_URL) }
-//
-//    single { createOkHttpClient() }
-//
-//    single { MoshiConverterFactory.create() }
-//
-//    single { Moshi.Builder().build() }
-
-
     single {
         val httpLoggingInterceptor = HttpLoggingInterceptor()
         httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BASIC
@@ -43,8 +34,6 @@ val NetworkModule = module {
 
         Retrofit.Builder()
             .baseUrl(BuildConfig.BASE_URL)
-//            .addConverterFactory(ScalarsConverterFactory.create())
-//            .addConverterFactory(GsonConverterFactory.create(get()))
             .addConverterFactory(MoshiConverterFactory.create())
             .client(networkClient)
             .build()
@@ -53,21 +42,6 @@ val NetworkModule = module {
 
 }
 
-fun createOkHttpClient(): OkHttpClient {
-    val httpLoggingInterceptor = HttpLoggingInterceptor()
-    httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BASIC
-    return OkHttpClient.Builder()
-        .connectTimeout(TIME_OUT, TimeUnit.SECONDS)
-        .readTimeout(TIME_OUT, TimeUnit.SECONDS)
-        .addInterceptor(httpLoggingInterceptor).build()
-}
-
-fun createRetrofit(okHttpClient: OkHttpClient, url: String): Retrofit {
-    return Retrofit.Builder()
-        .baseUrl(url)
-        .client(okHttpClient)
-        .addConverterFactory(MoshiConverterFactory.create()).build()
-}
 
 fun createService(retrofit: Retrofit): ApiService {
     return retrofit.create(ApiService::class.java)
